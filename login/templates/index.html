@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS - Login</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        /* Additional styles for tabs */
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            margin: 0 5px;
+            border-radius: 5px;
+        }
+        .tab.active {
+            background-color: #ddd;
+            font-weight: bold;
+        }
+        .form-container {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .form-container.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the CMS</h1>
+    <p>Please log in as Teacher or Student:</p>
+
+    <div class="tab-container">
+        <div class="tab active" id="teacher-tab" onclick="showForm('teacher')">Teacher</div>
+        <div class="tab" id="student-tab" onclick="showForm('student')">Student</div>
+    </div>
+
+    <div id="teacher-form" class="form-container active">
+        <h2>Teacher Login</h2>
+        <form action="/login" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" value="teacher" readonly required>
+            <br><br>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required>
+            <br><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <div id="student-form" class="form-container">
+        <h2>Student Login</h2>
+        <form action="/login" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" value="student" readonly required>
+            <br><br>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required>
+            <br><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript to toggle between forms
+        function showForm(userType) {
+            // Tabs
+            document.getElementById('teacher-tab').classList.remove('active');
+            document.getElementById('student-tab').classList.remove('active');
+            document.getElementById(userType + '-tab').classList.add('active');
+
+            // Forms
+            document.getElementById('teacher-form').classList.remove('active');
+            document.getElementById('student-form').classList.remove('active');
+            document.getElementById(userType + '-form').classList.add('active');
+        }
+    </script>
+</body>
+</html>
